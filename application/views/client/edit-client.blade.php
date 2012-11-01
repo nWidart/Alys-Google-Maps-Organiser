@@ -10,11 +10,12 @@ Edit a client| Alys Google Maps manager
 	<div class="container">
 		<div class="row-fluid">
 			<?php $message = Session::get('message'); ?>
-			<?php if(!empty($message)) : ?>
-				<div class="alert alert-success">
+			@if(!empty($message))
+				<div class="alert alert-success fade in">
 					{{ $message }}
+					<button type="button" class="close" data-dismiss="alert">×</button>
 				</div>
-			<?php endif; ?>
+			@endif
 			{{ Form::horizontal_open() }}
 			<div class="span5">
 

@@ -57,5 +57,8 @@
 	<!-- Content -->
 	@yield('content')
 
+	<!-- Extra page specific scripts -->
+	@yield('scripts')
+
 </body>
 </html>

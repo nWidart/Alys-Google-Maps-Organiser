@@ -8,11 +8,12 @@ Client list | Alys Google Maps manager
 <div class="container">
 	<div class="row-fluid">
 		<?php $message = Session::get('message'); ?>
-		<?php if(!empty($message)) : ?>
-			<div class="alert alert-success">
+		@if(!empty($message))
+			<div class="alert alert-success fade in">
 				{{ $message }}
+				<button type="button" class="close" data-dismiss="alert">×</button>
 			</div>
-		<?php endif; ?>
+		@endif
 	</div>
 	<div class="row-fluid">
 		<div class="span3">

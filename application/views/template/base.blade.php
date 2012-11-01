@@ -57,5 +57,10 @@
 	<!-- Content -->
 	@yield('content')
 
+	<!-- Extra page specific scripts -->
+	@yield('scripts')
+
+	<!-- Side wide scripts -->
+	<script type="text/javascript">$(".alert").alert()</script>
 </body>
 </html>
