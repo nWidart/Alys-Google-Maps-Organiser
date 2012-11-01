@@ -34,4 +34,6 @@ dwsync.xml
 .CVS
 intermediate
 publish
+application/config
+application/config/*
 .idea

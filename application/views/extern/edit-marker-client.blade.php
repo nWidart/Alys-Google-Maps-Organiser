@@ -79,9 +79,6 @@ Edit a marker| Alys Google Maps manager
 				echo Form::control_group(Form::label('type', 'Type'),
 				Form::xlarge_text('type', $marker->type), '');
 			}
-			
-			echo Form::control_group(Form::label('client', 'Client'),
-			Form::select('client', $clients, $marker->client_id));
 
 			echo Form::actions(array(Buttons::primary_submit('Edit')));
 

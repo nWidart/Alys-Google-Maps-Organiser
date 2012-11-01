@@ -111,7 +111,7 @@ class Home_Controller extends Base_Controller {
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];;
+			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
 			$marker->rem1 = ( !empty($input['rem1']) ) ? $input['rem1'] : '';
 			$marker->rem2 = ( !empty($input['rem2']) ) ? $input['rem2'] : '';
 			$marker->rem3 = ( !empty($input['rem3']) ) ? $input['rem3'] : '';
@@ -145,6 +145,7 @@ class Home_Controller extends Base_Controller {
 	public function post_edit_marker($id)
 	{
 		$input = Input::all();
+		$file = Input::file('img_input');
 		$rules = array(
 			'name' => 'required|max:150|alpha',
 			'address' => 'required|max:200|alpha_num',
@@ -160,14 +161,18 @@ class Home_Controller extends Base_Controller {
 		}
 		else
 		{
+			
 			$marker = Marker::where('id', '=', $id)->first();
-
+			if (array_get($file, $file['tmp_name']))
+			{
+				Input::upload('img_input', path('public').'/img/uploaded', $file['name']);
+			}
 			$marker->name = $input['name'];
 			$marker->address = $input['address'];
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = $input['client'];
+			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
 			$marker->rem1 = ( !empty($input['rem1']) ) ? $input['rem1'] : '';
 			$marker->rem2 = ( !empty($input['rem2']) ) ? $input['rem2'] : '';
 			$marker->rem3 = ( !empty($input['rem3']) ) ? $input['rem3'] : '';
@@ -222,6 +227,7 @@ class Home_Controller extends Base_Controller {
 		$data = array();
 		
 		Session::put('client_name_s', 'Buhlmann');
+		Session::put('client_id_s', '1');
 
 		foreach ($clients as $client) {
 			$data[$client->id] = $client->societe;

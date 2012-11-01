@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width">
 	{{ Asset::container('bootstrapper')->styles(); }}
 	{{ Asset::container('bootstrapper')->scripts(); }}
+	{{ Asset::scripts() }}
+	{{ Asset::styles() }}
 </head>
 <body>
 	<!-- HEADER -->

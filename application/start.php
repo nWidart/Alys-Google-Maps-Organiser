@@ -171,3 +171,8 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+/*
+*	Composer styles and scripts
+*/
+require_once 'composer.php';
