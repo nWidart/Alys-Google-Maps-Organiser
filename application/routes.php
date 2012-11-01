@@ -37,8 +37,7 @@ Route::get('/', function()
 	
 });
 
-Route::controller('home');
-Route::controller('client');
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------
