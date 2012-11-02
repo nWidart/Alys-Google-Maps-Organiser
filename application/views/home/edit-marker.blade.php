@@ -124,6 +124,12 @@ Edit a marker| Alys Google Maps manager
 		</div>
 
 		{{ Form::close() }}
+		<div class="span3 offset1 img_thumb">
+			@if ( !empty($marker->img_url) )
+				<h5>Votre image:</h5>
+				<div class="img_wrapper"><img src="{{ $marker->img_url }}"></div>
+			@endif
+		</div>
 	</div>
 </div>
 @endsection

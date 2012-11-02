@@ -87,14 +87,15 @@ class Home_Controller extends Base_Controller {
 	}
 	public function post_new_marker()
 	{
-		$input = Input::get();
-
+		$input = Input::all();
+		$file = Input::file('img_input');
 		$rules = array(
 			'name' => 'required|max:150|alpha|unique:markers',
 			'address' => 'required|max:200|unique:markers',
 			'lat' => 'required|numeric',
 			'lng' => 'required|numeric',
 			'type' => 'required|alpha',
+			'img_input' => 'mimes:jpg,gif,png,jpeg|image'
 		);
 
 		$v = Validator::make($input, $rules);
@@ -105,6 +106,13 @@ class Home_Controller extends Base_Controller {
 		}
 		else
 		{
+			// save thumbnail
+			if ( !empty($file['name']) )
+			{
+				$success = Resizer::open( $file )
+					->resize( 120 , 100 , 'landscape')
+					->save( 'public/img/uploads/'.$file['name'] , 90);
+			}
 			$marker = new Marker();
 			$marker->name = $input['name'];
 			$marker->address = $input['address'];
@@ -112,11 +120,12 @@ class Home_Controller extends Base_Controller {
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
 			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
-			$marker->rem1 = ( !empty($input['rem1']) ) ? $input['rem1'] : '';
-			$marker->rem2 = ( !empty($input['rem2']) ) ? $input['rem2'] : '';
-			$marker->rem3 = ( !empty($input['rem3']) ) ? $input['rem3'] : '';
-			$marker->rem4 = ( !empty($input['rem4']) ) ? $input['rem4'] : '';
-			$marker->rem5 = ( !empty($input['rem5']) ) ? $input['rem5'] : '';
+			$marker->rem1 = Input::get('rem1', '');
+			$marker->rem2 = Input::get('rem2', '');
+			$marker->rem3 = Input::get('rem3', '');
+			$marker->rem4 = Input::get('rem4', '');
+			$marker->rem5 = Input::get('rem5', '');
+			$marker->img_url = '/img/uploads/' . $file['name'];
 			$marker->save();
 
 			return Redirect::to_action('home@new_marker')->with('message', 'Marker added!');
@@ -152,7 +161,7 @@ class Home_Controller extends Base_Controller {
 			'lat' => 'required|numeric',
 			'lng' => 'required|numeric',
 			'type' => 'required|alpha',
-			'img_input' => 'mimes:jpg,gif,png|image'
+			'img_input' => 'mimes:jpg,gif,png,jpeg|image'
 		);
 		$v = Validator::make($input, $rules);
 		if ( $v->fails() )
@@ -161,24 +170,28 @@ class Home_Controller extends Base_Controller {
 		}
 		else
 		{
-			
-			$marker = Marker::where('id', '=', $id)->first();
-			if (array_get($file, $file['tmp_name']))
+			// save thumbnail
+			if ( !empty($file['name']) )
 			{
-				Input::upload('img_input', path('public').'/img/uploaded', $file['name']);
+				$success = Resizer::open( $file )
+					->resize( 120 , 100 , 'landscape')
+					->save( 'public/img/uploads/'.$file['name'] , 90);
+
 			}
+
+			$marker = Marker::where('id', '=', $id)->first();
 			$marker->name = $input['name'];
 			$marker->address = $input['address'];
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
 			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
-			$marker->rem1 = ( !empty($input['rem1']) ) ? $input['rem1'] : '';
-			$marker->rem2 = ( !empty($input['rem2']) ) ? $input['rem2'] : '';
-			$marker->rem3 = ( !empty($input['rem3']) ) ? $input['rem3'] : '';
-			$marker->rem4 = ( !empty($input['rem4']) ) ? $input['rem4'] : '';
-			$marker->rem5 = ( !empty($input['rem5']) ) ? $input['rem5'] : '';
-
+			$marker->rem1 = Input::get('rem1', '');
+			$marker->rem2 = Input::get('rem2', '');
+			$marker->rem3 = Input::get('rem3', '');
+			$marker->rem4 = Input::get('rem4', '');
+			$marker->rem5 = Input::get('rem5', '');
+			$marker->img_url = '/img/uploads/' . $file['name'];
 			$marker->save();
 
 			return Redirect::to_action('home@edit_marker/'.$id)->with('message', 'Marker updated!');

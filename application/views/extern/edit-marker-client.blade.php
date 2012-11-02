@@ -16,7 +16,7 @@ Edit a marker| Alys Google Maps manager
 				<button type="button" class="close" data-dismiss="alert">×</button>
 			</div>
 		@endif
-		{{ Form::horizontal_open() }}
+		{{ Form::horizontal_open_for_files() }}
 		<div class="span5">
 		<?php 
 			
@@ -80,6 +80,17 @@ Edit a marker| Alys Google Maps manager
 				echo Form::control_group(Form::label('type', 'Type'),
 				Form::xlarge_text('type', $marker->type), '');
 			}
+			if ( $errors->has('img_input') )
+			{
+				echo Form::control_group(Form::label('img_input', 'Image'),
+				Form::file('img_input'),
+				Form::inline_help( $errors->first('img_input') ));
+			}
+			else
+			{
+				echo Form::control_group(Form::label('img_input', 'Image'),
+				Form::file('img_input'));
+			}
 
 			echo Form::actions(array(Buttons::primary_submit('Edit')));
 
@@ -110,6 +121,12 @@ Edit a marker| Alys Google Maps manager
 		</div>
 
 		{{ Form::close() }}
+		<div class="span3 offset1 img_thumb">
+			@if ( !empty($marker->img_url) )
+				<h5>Votre image:</h5>
+				<div class="img_wrapper"><img src="{{ $marker->img_url }}"></div>
+			@endif
+		</div>
 	</div>
 </div>
 	
