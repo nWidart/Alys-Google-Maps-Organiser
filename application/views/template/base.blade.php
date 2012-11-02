@@ -43,6 +43,7 @@
 								<li><a href="{{ URL::to_action('client@new_client') }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
 							</ul>
 						</li>
+						<li><a href="{{ URL::to_action('geocode@index') }}"><i class="icon-map-marker icon-white"></i> Geocode</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

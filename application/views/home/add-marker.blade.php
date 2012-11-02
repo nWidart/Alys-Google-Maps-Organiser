@@ -38,13 +38,15 @@ Add a marker| Alys Google Maps manager
 			{
 				echo Form::control_group(Form::label('address', 'Adresse'),
 				Form::xlarge_text('address'), 'error',
-				Form::inline_help( $errors->first('address') ));
+				Form::inline_help( $errors->first('address') ) );
 			}
 			else
 			{
 				echo Form::control_group(Form::label('address', 'Adresse'),
-				Form::xlarge_text('address'), '');
+				Form::xlarge_text('address'), '',
+				Form::block_help('Longitude & Latitude are generated automaticly.'));
 			}
+				//echo '<div class="span3 offset2"><button id="address_btn" class="btn btn-info btn-mini" type="button">Calculate coords</button></div><br/><br/>';
 			
 			if ( $errors->has('lat') )
 			{
@@ -134,4 +136,46 @@ Add a marker| Alys Google Maps manager
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#address_btn").on('click', function(){
+    	var geocoder = new google.maps.Geocoder();
+		var address = $("#address").val();
+
+		geocoder.geocode( { 'address': address}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+		    var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+		     $("#lat").val(latitude);
+		     $("#lng").val(longitude);
+		    } 
+		});
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#address").on("change", function(){
+		var geocoder = new google.maps.Geocoder();
+		var address = $("#address").val();
+
+		geocoder.geocode( { 'address': address}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+		    var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+		     $("#lat").val(latitude);
+		     $("#lng").val(longitude);
+		    } 
+		});
+	});
+
+});
+</script>
+
 @endsection

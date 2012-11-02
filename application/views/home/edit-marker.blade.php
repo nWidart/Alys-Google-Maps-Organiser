@@ -42,7 +42,8 @@ Edit a marker| Alys Google Maps manager
 			else
 			{
 				echo Form::control_group(Form::label('address', 'Adresse'),
-				Form::xlarge_text('address', $marker->address), '');
+				Form::xlarge_text('address', $marker->address), '',
+				Form::block_help('Longitude & Latitude are generated automaticly.'));
 			}
 
 			if ( $errors->has('lat') )
@@ -132,4 +133,26 @@ Edit a marker| Alys Google Maps manager
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#address").on("change", function(){
+		var geocoder = new google.maps.Geocoder();
+		var address = $("#address").val();
+
+		geocoder.geocode( { 'address': address}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+		    var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+		     $("#lat").val(latitude);
+		     $("#lng").val(longitude);
+		    } 
+		});
+	});
+
+});
+</script>
 @endsection

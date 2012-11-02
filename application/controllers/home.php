@@ -90,7 +90,7 @@ class Home_Controller extends Base_Controller {
 		$input = Input::all();
 		$file = Input::file('img_input');
 		$rules = array(
-			'name' => 'required|max:150|alpha|unique:markers',
+			'name' => 'required|max:150|unique:markers',
 			'address' => 'required|max:200|unique:markers',
 			'lat' => 'required|numeric',
 			'lng' => 'required|numeric',
@@ -157,8 +157,8 @@ class Home_Controller extends Base_Controller {
 		$input = Input::all();
 		$file = Input::file('img_input');
 		$rules = array(
-			'name' => 'required|max:150|alpha',
-			'address' => 'required|max:200|alpha_num',
+			'name' => 'required|max:150',
+			'address' => 'required|max:200',
 			'lat' => 'required|numeric',
 			'lng' => 'required|numeric',
 			'type' => 'required|alpha',
@@ -219,7 +219,6 @@ class Home_Controller extends Base_Controller {
 		Session::flush();
 		return Redirect::to_action('home@marker');
 	}
-
 
 	// Liste marker pour Buhlmann
 	// 

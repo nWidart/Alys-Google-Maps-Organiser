@@ -1,5 +1,5 @@
 <?php
-
+require_once 'libraries/geocode.php';
 /*
 |--------------------------------------------------------------------------
 | PHP Display Errors Configuration
