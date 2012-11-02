@@ -37,6 +37,26 @@ Route::get('/', function()
 	
 });
 
+/**
+ * Routes principales
+ * 
+ */
+Route::get('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker') );
+Route::any('new', array('as' => 'new_marker', 'uses' => 'home@new_marker') );
+Route::get('new/(:any)', array('as' => 'new_marker', 'uses' => 'home@new_marker') );
+Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker') );
+
+/**
+ * Routes pour les clients
+ * 
+ */
+
+// Route pour Bulmann
+Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'home@marker_buhlmann') );
+
+// Route pour Lemmens
+Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'home@marker_lemmens') );
+
 Route::controller(Controller::detect());
 
 /*

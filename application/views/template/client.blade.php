@@ -39,8 +39,8 @@
 								<i class="icon-book icon-white"></i> Adresses	<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ URL::to_action('home@marker_'.Session::get('client_name_s')) }}"><i class="icon-align-justify"></i> Listing</a></li>
-								<li><a href="{{ URL::to_action('home@new_marker/'.Session::get('client_id_s')) }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
+								<li><a href="{{ URL::to_route(''.Session::get('client_name_s').'') }}"><i class="icon-align-justify"></i> Listing</a></li>
+								<li><a href="{{ URL::to_route('new_marker',Session::get('client_id_s')) }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
 							</ul>
 						</li>
 					</ul>

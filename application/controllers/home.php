@@ -240,7 +240,7 @@ class Home_Controller extends Base_Controller {
 		$clients = Client::all();
 		$data = array();
 		
-		Session::put('client_name_s', 'Buhlmann');
+		Session::put('client_name_s', 'buhlmann');
 		Session::put('client_id_s', '1');
 
 		foreach ($clients as $client) {
@@ -272,7 +272,7 @@ class Home_Controller extends Base_Controller {
 		$clients = Client::all();
 		$data = array();
 		
-		Session::put('client_name_s', 'Lemmens');
+		Session::put('client_name_s', 'lemmens');
 		Session::put('client_id_s', '2');
 
 		foreach ($clients as $client) {

@@ -8,7 +8,7 @@ Markers list | Alys Google Maps manager
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
-			<a href="{{ URL::to_action('home@new_marker') }}"><button class="btn btn-primary">New Marker</button></a>
+			<a href="{{ URL::to_route('new_marker',Session::get('client_id_s')) }}"><button class="btn btn-primary">New Marker</button></a>
 			<button class="btn">Export</button>
 		</div>
 	</div>
@@ -49,7 +49,7 @@ Markers list | Alys Google Maps manager
 							<td>{{ $marker->type }}</td>
 							
 							<td>
-								  <a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
+								  <a href="{{ URL::to_route('edit_marker',$marker->id) }}"><i class="icon-pencil"></i></a>
 								  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
 							</td>
 						</tr>
