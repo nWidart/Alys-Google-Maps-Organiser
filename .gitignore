@@ -34,7 +34,6 @@ dwsync.xml
 .CVS
 intermediate
 publish
-application/config
-application/config/*
+
 public/img/upload
 .idea
