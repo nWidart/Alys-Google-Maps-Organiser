@@ -2,3 +2,9 @@ web1:
   shared_writable_dirs:
     - storage
     - public/img/uploads
+    - /application/storage/cache
+    - /application/storage/sessions
+    - /application/storage/database
+    - /application/storage/views
+    - /application/storage/logs
+    - /application/storage/work
