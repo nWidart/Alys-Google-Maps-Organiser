@@ -125,7 +125,8 @@ class Home_Controller extends Base_Controller {
 			$marker->rem3 = Input::get('rem3', '');
 			$marker->rem4 = Input::get('rem4', '');
 			$marker->rem5 = Input::get('rem5', '');
-			$marker->img_url = '/img/uploads/' . $file['name'];
+			if ( !empty($file['name']) )
+				$marker->img_url = '/img/uploads/' . $file['name'];
 			$marker->save();
 
 			return Redirect::to_action('home@new_marker')->with('message', 'Marker added!');
@@ -191,7 +192,8 @@ class Home_Controller extends Base_Controller {
 			$marker->rem3 = Input::get('rem3', '');
 			$marker->rem4 = Input::get('rem4', '');
 			$marker->rem5 = Input::get('rem5', '');
-			$marker->img_url = '/img/uploads/' . $file['name'];
+			if ( !empty($file['name']) )
+				$marker->img_url = '/img/uploads/' . $file['name'];
 			$marker->save();
 
 			return Redirect::to_action('home@edit_marker/'.$id)->with('message', 'Marker updated!');
