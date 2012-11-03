@@ -11,7 +11,7 @@ return array(
             'username' => $_SERVER['DB1_USER'],
             'password' => $_SERVER['DB1_PASS'],
             'charset'  => 'utf8',
-            'prefix'   => '',
+            'prefix'   => 'gmaps_',
         ),
     ),
 );
