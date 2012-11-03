@@ -48,11 +48,15 @@ Markers list | Alys Google Maps manager
 							<td>{{ $marker->type }}</td>
 							
 							<td>
-								  <a href="{{ URL::to_route('edit_marker',$marker->id) }}"><i class="icon-pencil"></i></a>
+								  <a href="{{ URL::to_route('client_edit_marker',$marker->id) }}"><i class="icon-pencil"></i></a>
 								  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
 							</td>
 						</tr>
 					@endforeach
+				@else
+					<p class="lead">
+						You don't have any markers. <a href="{{ URL::to_route('client_new_marker',Session::get('client_id_s')) }}">Start by adding a marker here.</a>
+					</p>
 				@endif
 			  </tbody>
 			</table>

@@ -11,26 +11,48 @@ class Home_Controller extends Base_Controller {
 
 	public function get_marker()
 	{
-		$markers = DB::table('markers')
-					->join('clients' ,'markers.client_id', '=','clients.id')
-					->get(array(
-						'markers.id', 
-						'markers.name', 
-						'markers.address', 
-						'markers.lat',
-						'markers.lng',
-						'markers.type',
-						'clients.societe'
-					));
 		$clients = Client::all();
 		$data = array();
 
 		foreach ($clients as $client) {
 			$data[$client->id] = $client->societe;
 		}
-		return View::make('home.markers-list')
-			->with('markers', $markers)
-			->with('clients', $data);
+
+		if (Session::has('client_id_s'))
+		{
+			$markers = DB::table('markers')
+				->join('clients' ,'markers.client_id', '=','clients.id')
+				->where('client_id', '=', Session::get('client_id_s'))
+				->get(array(
+					'markers.id', 
+					'markers.name', 
+					'markers.address', 
+					'markers.lat',
+					'markers.lng',
+					'markers.type',
+					'clients.societe'
+				));
+			return View::make('extern.markers-list-client')
+				->with('markers', $markers)
+				->with('clients', $data);
+		}
+		else
+		{
+			$markers = DB::table('markers')
+				->join('clients' ,'markers.client_id', '=','clients.id')
+				->get(array(
+					'markers.id', 
+					'markers.name', 
+					'markers.address', 
+					'markers.lat',
+					'markers.lng',
+					'markers.type',
+					'clients.societe'
+				));	
+			return View::make('home.markers-list')
+				->with('markers', $markers)
+				->with('clients', $data);
+		}		
 	}
 
 	public function post_marker()
@@ -217,72 +239,9 @@ class Home_Controller extends Base_Controller {
 	public function get_delete_session()
 	{
 		Session::flush();
-		return Redirect::to_action('home@marker');
+		return Redirect::to_action('home@index');
 	}
 
-	// Liste marker pour Buhlmann
-	// 
-	// 
-	public function get_marker_buhlmann()
-	{
-		$markers = DB::table('markers')
-					->join('clients' ,'markers.client_id', '=','clients.id')
-					->where('client_id', '=', 1)
-					->get(array(
-						'markers.id', 
-						'markers.name', 
-						'markers.address', 
-						'markers.lat',
-						'markers.lng',
-						'markers.type',
-						'clients.societe'
-					));
-		$clients = Client::all();
-		$data = array();
-		
-		Session::put('client_name_s', 'buhlmann');
-		Session::put('client_id_s', '1');
-
-		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
-		}
-		return View::make('extern.markers-list-client')
-			->with('markers', $markers)
-			->with('clients', $data)
-			->with('client_name', 'buhlmann');
-	}
-
-	// Liste marker pour Lemmens
-	// 
-	// 
-	public function get_marker_lemmens()
-	{
-		$markers = DB::table('markers')
-					->join('clients' ,'markers.client_id', '=','clients.id')
-					->where('client_id', '=', 2)
-					->get(array(
-						'markers.id', 
-						'markers.name', 
-						'markers.address', 
-						'markers.lat',
-						'markers.lng',
-						'markers.type',
-						'clients.societe'
-					));
-		$clients = Client::all();
-		$data = array();
-		
-		Session::put('client_name_s', 'lemmens');
-		Session::put('client_id_s', '2');
-
-		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
-		}
-		return View::make('extern.markers-list-client')
-			->with('markers', $markers)
-			->with('clients', $data)
-			->with('client_name', 'lemmens');
-	}
 
 
 }

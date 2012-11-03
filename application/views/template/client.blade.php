@@ -20,7 +20,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#" name="top">
+				<a class="brand" href="{{ URL::to_route(''.Session::get('client_name_s').'') }}" name="top">
 					<?php
 					if (Session::has('client_name_s'))
 					{
@@ -39,8 +39,8 @@
 								<i class="icon-book icon-white"></i> Adresses	<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ URL::to_route(''.Session::get('client_name_s').'') }}"><i class="icon-align-justify"></i> Listing</a></li>
-								<li><a href="{{ URL::to_route('new_marker',Session::get('client_id_s')) }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
+								<li><a href="{{ URL::to_route('client_marker_list') }}"><i class="icon-align-justify"></i> Listing</a></li>
+								<li><a href="{{ URL::to_route('client_new_marker',Session::get('client_id_s')) }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -56,6 +56,17 @@
 
 	<!-- Content -->
 	@yield('content')
+
+	<footer class="footer">
+		<div class="container">
+			<ul class="footer-links">
+				<li><a href="http://www.alys.be">Alys</a></li>
+			</ul>
+			<p class="pull-right">
+				<a href="{{ URL::to_action('home@delete_session') }}"><small>Admin flush</small></a>
+			</p>
+		</div>
+	</footer>
 
 	<!-- Extra page specific scripts -->
 	@yield('scripts')

@@ -41,21 +41,26 @@ Route::get('/', function()
  * Routes principales
  * 
  */
-Route::get('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker') );
+Route::any('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker') );
 Route::any('new', array('as' => 'new_marker', 'uses' => 'home@new_marker') );
-Route::get('new/(:any)', array('as' => 'new_marker', 'uses' => 'home@new_marker') );
 Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker') );
 
+Route::any(Session::get('client_name_s').'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
+Route::any(Session::get('client_name_s').'/new/(:any)', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
+Route::any(Session::get('client_name_s').'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
 /**
  * Routes pour les clients
  * 
  */
 
 // Route pour Bulmann
-Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'home@marker_buhlmann') );
+Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@buhlmann') );
 
 // Route pour Lemmens
-Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'home@marker_lemmens') );
+Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@lemmens') );
+
+// Route pour testing
+Route::get('testing', array('as' => 'testing', 'uses' => 'company@testing') );
 
 Route::controller(Controller::detect());
 
