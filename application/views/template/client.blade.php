@@ -13,7 +13,7 @@
 <body>
 	<!-- HEADER -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
+		<div class="navbar-inner {{ Session::get('client_name_s') }}">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
@@ -34,8 +34,8 @@
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<li class="dropdown {{ Session::get('client_name_s') }}">
+							<a class="dropdown-toggle{{ Session::get('client_name_s') }}" data-toggle="dropdown" href="#">
 								<i class="icon-book icon-white"></i> Adresses	<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
