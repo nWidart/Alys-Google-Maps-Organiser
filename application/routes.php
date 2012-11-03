@@ -32,37 +32,76 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('before' => 'auth'));
+
+if(!Request::cli())
 {
-	
-});
+	/**
+	 * Routes principales
+	 * 
+	 */
+	Route::any('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker', 'before' => 'auth') );
+	Route::any('client/listing', array('before' => 'auth', 'uses' => 'client@listing') );
+	Route::any('client/new_client', array('before' => 'auth', 'uses'=>'client@new_client'));
+	Route::any('new', array('as' => 'new_marker', 'uses' => 'home@new_marker', 'before' => 'auth') );
+	Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker') );
+	Route::any('geocode/index', array('uses' => 'geocode@index', 'before' => 'auth'));
 
-/**
- * Routes principales
- * 
- */
-Route::any('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker') );
-Route::any('new', array('as' => 'new_marker', 'uses' => 'home@new_marker') );
-Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker') );
 
-Route::any(Session::get('client_name_s').'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
-Route::any(Session::get('client_name_s').'/new/(:any)', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
-Route::any(Session::get('client_name_s').'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
-/**
- * Routes pour les clients
- * 
- */
+	Route::any(Session::get('client_name_s').'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
+	Route::any(Session::get('client_name_s').'/new/(:any)', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
+	Route::any(Session::get('client_name_s').'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
+	/**
+	 * Routes pour les clients
+	 * 
+	 */
 
-// Route pour Bulmann
-Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@buhlmann') );
+	// Route pour Bulmann
+	Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@buhlmann') );
 
-// Route pour Lemmens
-Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@lemmens') );
+	// Route pour Lemmens
+	Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@lemmens') );
 
-// Route pour testing
-Route::get('testing', array('as' => 'testing', 'uses' => 'company@testing') );
+	// Route pour testing
+	Route::get('testing', array('as' => 'testing', 'uses' => 'company@testing') );
 
-Route::controller(Controller::detect());
+	Route::controller(Controller::detect());
+
+
+	/**
+	 * Login routes
+	 * 
+	 */
+	Route::get('login', function()
+	{
+		return View::make('login');
+	});
+
+	Route::post('login', function()
+	{
+		$userdata = array(
+			'username' => Input::get('username'),
+			'password' => Input::get('password')
+		);
+		if ( Auth::attempt($userdata) )
+		{
+			// logged in
+			return Redirect::to_action('home@index');
+		}
+		else
+		{
+			return Redirect::to('login')
+				->with('login_errors', true);
+		}
+	});
+
+	Route::get('logout', function()
+	{
+		Auth::logout();
+		return Redirect::to('login');
+	});
+}
+
 
 /*
 |--------------------------------------------------------------------------

@@ -45,6 +45,32 @@
 						</li>
 						<li><a href="{{ URL::to_action('geocode@index') }}"><i class="icon-map-marker icon-white"></i> Geocode</a></li>
 					</ul>
+					<div class="pull-right">
+						<ul class="nav pull-right">
+							@if ( Auth::check() )
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ Auth::user()->username }} <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
+									<li class="divider"></li>
+									<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
+								</ul>
+							</li>
+							@else
+							<li class="dropdown">
+								<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+									{{ Form::open('login') }}
+										<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
+										<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">										
+										<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+
+									{{ Form::close() }}
+								</div>
+							</li>
+							@endif
+
+						</ul>
+					</div>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
