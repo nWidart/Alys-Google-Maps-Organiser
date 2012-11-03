@@ -25,6 +25,7 @@
 					<ul class="nav">
 						<li><a href="{{ URL::to_action('home@index') }}"><i class="icon-home icon-white"></i> Home</a></li>
 						<li class="divider-vertical"></li>
+						@if ( Auth::check() )
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-book icon-white"></i> Adresses	<span class="caret"></span>
@@ -43,7 +44,9 @@
 								<li><a href="{{ URL::to_action('client@new_client') }}"><i class="icon-plus-sign"></i> Ajouter</a></li>
 							</ul>
 						</li>
+
 						<li><a href="{{ URL::to_action('geocode@index') }}"><i class="icon-map-marker icon-white"></i> Geocode</a></li>
+						@endif
 					</ul>
 					<div class="pull-right">
 						<ul class="nav pull-right">
