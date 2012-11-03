@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'development',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql' => array(
+		'development' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
 			'database' => 'gmaps-org',
