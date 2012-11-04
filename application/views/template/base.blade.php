@@ -20,7 +20,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="{{ URL::to_action('home@index') }}" name="top">Alys Google Maps Organiser</a>
+				<a class="brand" href="{{ URL::to_route('dashboard') }}" name="top">Alys Google Maps Organiser</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="{{ URL::to_action('home@index') }}"><i class="icon-home icon-white"></i> Home</a></li>

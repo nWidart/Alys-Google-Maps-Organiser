@@ -11,18 +11,18 @@ class Home_Controller extends Base_Controller {
 
 	public function get_marker()
 	{
-		$clients = Client::all();
+		$clients = User::all();
 		$data = array();
 
 		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
+			$data[$client->id] = $client->username;
 		}
 
 		if ( Auth::user()->group == 2 )
 		{
 			$markers = DB::table('markers')
-				->join('clients' ,'markers.client_id', '=','clients.id')
-				->where('client_id', '=', Auth::user()->client_id)
+				->join('users' ,'markers.user_id', '=','users.id')
+				->where('user_id', '=', Auth::user()->id)
 				->get(array(
 					'markers.id', 
 					'markers.name', 
@@ -30,7 +30,7 @@ class Home_Controller extends Base_Controller {
 					'markers.lat',
 					'markers.lng',
 					'markers.type',
-					'clients.societe'
+					'users.username'					
 				));
 			return View::make('extern.markers-list-client')
 				->with('markers', $markers)
@@ -39,7 +39,7 @@ class Home_Controller extends Base_Controller {
 		else
 		{
 			$markers = DB::table('markers')
-				->join('clients' ,'markers.client_id', '=','clients.id')
+				->join('users' ,'markers.user_id', '=','users.id')
 				->get(array(
 					'markers.id', 
 					'markers.name', 
@@ -47,8 +47,9 @@ class Home_Controller extends Base_Controller {
 					'markers.lat',
 					'markers.lng',
 					'markers.type',
-					'clients.societe'
+					'users.username'
 				));	
+
 			return View::make('home.markers-list')
 				->with('markers', $markers)
 				->with('clients', $data);
@@ -59,23 +60,23 @@ class Home_Controller extends Base_Controller {
 	{
 		$id = Input::get('client');
 		$markers = DB::table('markers')
-					->join('clients' ,'markers.client_id', '=','clients.id')
-					->where('client_id', '=', $id)
-					->get(array(
-						'markers.id',
-						'markers.name',
-						'markers.address',
-						'markers.lat',
-						'markers.lng',
-						'markers.type',
-						'clients.societe'
-					));
+				->join('users' ,'markers.user_id', '=','users.id')
+				->where('user_id', '=', $id)
+				->get(array(
+					'markers.id',
+					'markers.name',
+					'markers.address',
+					'markers.lat',
+					'markers.lng',
+					'markers.type',
+					'users.username'
+				));
 
-		$clients = Client::all();
+		$clients = User::all();
 		$data = array();
 
 		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
+			$data[$client->id] = $client->username;
 		}
 		return View::make('home.markers-list')
 			->with('markers', $markers)
@@ -86,11 +87,11 @@ class Home_Controller extends Base_Controller {
 
 	public function get_new_marker()
 	{
-		$clients = Client::all();
+		$clients = User::all();
 
 		$data = array();
 		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
+			$data[$client->id] = $client->username;
 		}
 		if (Auth::user()->group == 2)
 		{
@@ -138,7 +139,7 @@ class Home_Controller extends Base_Controller {
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = (Auth::user()->group == 2) ? Auth::user()->client_id : $input['client'];
+			$marker->user_id = (Auth::user()->group == 2) ? Auth::user()->id : $input['client'];
 			$marker->rem1 = Input::get('rem1', '');
 			$marker->rem2 = Input::get('rem2', '');
 			$marker->rem3 = Input::get('rem3', '');
@@ -155,11 +156,11 @@ class Home_Controller extends Base_Controller {
 	public function get_edit_marker($id)
 	{
 		$marker = Marker::find($id);
-		$clients = Client::all();
+		$clients = User::all();
 		$data = array();
 
 		foreach ($clients as $client) {
-			$data[$client->id] = $client->societe;
+			$data[$client->id] = $client->username;
 		}
 		if ( Auth::user()->group == 2 )
 		{
@@ -205,7 +206,7 @@ class Home_Controller extends Base_Controller {
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = (Auth::user()->group == 2) ? Auth::user()->client_id : $input['client'];
+			$marker->user_id = (Auth::user()->group == 2) ? Auth::user()->id : $input['client'];
 			$marker->rem1 = Input::get('rem1', '');
 			$marker->rem2 = Input::get('rem2', '');
 			$marker->rem3 = Input::get('rem3', '');
@@ -238,7 +239,5 @@ class Home_Controller extends Base_Controller {
 		Session::flush();
 		return Redirect::to_action('home@index');
 	}
-
-
 
 }

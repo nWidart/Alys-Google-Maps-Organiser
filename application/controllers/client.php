@@ -11,8 +11,9 @@ class Client_Controller extends Base_Controller
 
 	public function get_listing()
 	{
-		$clients = Client::all();
-		return View::make('client.client-list')->with('clients', $clients);
+		$clients = User::all();
+		return View::make('client.client-list')
+			->with('clients', $clients);
 	}
 
 	public function get_new_client()
@@ -24,8 +25,8 @@ class Client_Controller extends Base_Controller
 	{
 		$input = Input::get();
 		$rules = array(
-			'societe' => 'required|max:100|unique:clients',
-			'nom' => 'required|max:100|alpha',
+			'username' => 'required|max:100|alpha_num|unique:users',
+			'password' => 'required|max:100|alpha_num',
 		);
 		$v = Validator::make($input, $rules);
 
@@ -35,33 +36,33 @@ class Client_Controller extends Base_Controller
 		}
 		else
 		{
-			$client = new Client();
-				$client->societe = $input['societe'];
-				$client->nom = $input['nom'];
+			$client = new User();
+				$client->username = $input['username'];
+				$client->password = Hash::make($input['password']);
+				$client->group = $input['group'];
 			$client->save();
-			return Redirect::to_action('client@listing')->with('message', 'Client added!');
+			return Redirect::to_action('client@listing')
+				->with('message', 'Client added!')
+				->with('hint', true);
 		}
 	}
 
 	public function get_edit_client($id)
 	{
-		$client = Client::find($id);
-		$marker_count = DB::table('clients')
-			->join('markers', 'clients.id', '=', 'markers.client_id')
-			->where('clients.id', '=', $id)
-			->count();
-
-
+		$client = User::find($id);
+		// $marker_count = DB::table('users')
+		// 	->join('markers', 'users.id', '=', 'markers.user_id')
+		// 	->where('user.id', '=', $id)
+		// 	->count();
 		return View::make('client.edit-client')
-			->with('client', $client)
-			->with('marker_count', $marker_count);
+			->with('client', $client);
 	}
 	public function post_edit_client($id)
 	{
 		$input = Input::all();
 		$rules = array(
-			'societe' => 'required|max:100',
-			'nom' => 'required|max:100|alpha',
+			'username' => 'required|max:100|alpha_num',
+			'password' => 'max:100|alpha_num',
 		);
 		$v = Validator::make($input, $rules);
 
@@ -71,9 +72,12 @@ class Client_Controller extends Base_Controller
 		}
 		else
 		{
-			$client = Client::where('id', '=', $id)->first();
-				$client->societe = $input['societe'];
-				$client->nom = $input['nom'];
+			$client = User::where('id', '=', $id)->first();
+				$client->username = $input['username'];
+				if ( !empty($input['password']) )
+				{
+					$client->password = Hash::make($input['password']);
+				}
 			$client->save();
 			return Redirect::to_action('client@edit_client/'.$id)->with('message', 'Client modified!');
 		}
@@ -81,7 +85,7 @@ class Client_Controller extends Base_Controller
 
 	public function get_delete_client($id)
 	{
-		Client::find($id)->delete();
+		User::find($id)->delete();
 
 		return Redirect::to_action('client@listing')->with('message', 'Client deleted');
 	}

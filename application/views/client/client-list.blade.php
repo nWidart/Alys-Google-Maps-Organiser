@@ -7,12 +7,23 @@ Client list | Alys Google Maps manager
 @section('content')
 <div class="container">
 	<div class="row-fluid">
-		<?php $message = Session::get('message'); ?>
+		<?php $message = Session::get('message');?>
 		@if(!empty($message))
 			<div class="alert alert-success fade in">
 				{{ $message }}
 				<button type="button" class="close" data-dismiss="alert">×</button>
 			</div>
+		@endif
+		@if (Session::has('hint'))
+		<div class="span8">
+			<div class="alert alert-block fade in">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				Don't forget to add correct route to the routes file!
+				<pre>
+Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index', 'before' => 'client') );
+				</pre>
+			</div>
+		</div>
 		@endif
 	</div>
 	<div class="row-fluid">
@@ -30,8 +41,9 @@ Client list | Alys Google Maps manager
 				  <thead>
 					<tr>
 					  <th>#</th>
-					  <th>Société</th>
-					  <th>Nom</th>
+					  <th>Société(login)</th>
+					  <th>Password</th>
+					  <th>Groupe</th>
 					  <th style="width: 36px;"></th>
 					</tr>
 				  </thead>
@@ -40,8 +52,15 @@ Client list | Alys Google Maps manager
 						@foreach ($clients as $client)
 							<tr>
 								<td>{{ $client->id }}</td>
-								<td>{{ $client->societe }}</td>
-								<td>{{ $client->nom }}</td>
+								<td>{{ $client->username }}</td>
+								<td>**********</td>
+								<td>
+									@if ($client->group == 1)
+										Admin
+									@else
+										Client
+									@endif
+								</td>
 								<td>
 									  <a href="{{ URL::to_action('client@edit_client/') }}/{{ $client->id }}"><i class="icon-pencil"></i></a>
 									  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>

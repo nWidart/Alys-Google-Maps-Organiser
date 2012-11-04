@@ -31,7 +31,7 @@
 |		});
 |
 */
-
+Route::controller(array('company', 'geocode', 'client', 'home'));
 Route::get('/', array('before' => 'auth'));
 
 if(!Request::cli())
@@ -59,15 +59,15 @@ if(!Request::cli())
 	 */
 
 	// Route pour Bulmann
-	Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
+	Route::any('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
 
 	// Route pour Lemmens
-	Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
+	Route::any('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
 
 	// Route pour testing
-	Route::get('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
+	Route::any('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
 
-	Route::controller(Controller::detect());
+	Route::any('testuser2', array('as' => 'testuser2', 'uses' => 'company@index', 'before' => 'client') );
 
 
 	/**
@@ -89,7 +89,7 @@ if(!Request::cli())
 		{
 			// logged in
 			if ( Auth::user()->group == 1 )
-				return Redirect::to_action('home@index');
+				return Redirect::to_route('dashboard');
 			else
 				return Redirect::to_route( strtolower(Auth::user()->username) );
 		}
@@ -105,6 +105,11 @@ if(!Request::cli())
 		Auth::logout();
 		return Redirect::to('login');
 	});
+
+	Route::get('dashboard', array('as' => 'dashboard', 'do' => function()
+	{
+	    return View::make('home.index');
+	}));
 }
 
 
@@ -178,7 +183,14 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	if (Auth::guest())
+	{
+		return Redirect::to('login');	
+	}
+	else
+	{
+		if ( !Auth::user()->group === 1 ) return Redirect::to('login');
+	}
 });
 Route::filter('client', function()
 {

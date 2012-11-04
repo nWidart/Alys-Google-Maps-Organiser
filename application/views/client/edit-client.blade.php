@@ -20,39 +20,44 @@ Edit a client| Alys Google Maps manager
 			<div class="span5">
 
 				<?php
-					if ( $errors->has('societe') )
+					if ( $errors->has('username') )
 					{
-						echo Form::control_group(Form::label('societe', 'Société'),
-						Form::xlarge_text('societe', $client->societe, array('Placeholder' => 'Societe') ),
+						echo Form::control_group(Form::label('username', 'Société'),
+						Form::xlarge_text('username', $client->username, array('Placeholder' => 'Societe') ),
 						'error',
-						Form::inline_help( $errors->first('societe') ));
+						Form::inline_help( $errors->first('username') ));
 					}
 					else
 					{
-						echo Form::control_group(Form::label('societe', 'Société'),
-						Form::xlarge_text('societe', $client->societe, array('Placeholder' => 'Societe') ), '');
+						echo Form::control_group(Form::label('username', 'Société'),
+						Form::xlarge_text('username', $client->username, array('Placeholder' => 'Societe') ), '');
 					}
 
-					if ( $errors->has('nom') )
+					if ( $errors->has('password') )
 					{
-						echo Form::control_group(Form::label('nom', 'Nom'),
-						Form::xlarge_text('nom', $client->nom, array('Placeholder' => 'Nom') ),
-						'error',
-						Form::inline_help( $errors->first('nom') ));
+						echo Form::control_group(
+							Form::label('password', 'New password'),
+							Form::password('password', array('class' => 'input-large')),
+							'error'),
+							Form::inline_help( $errors->first('nom') );
 					}
 					else
 					{
-						echo Form::control_group(Form::label('nom', 'Nom'),
-						Form::xlarge_text('nom', $client->nom, array('Placeholder' => 'Nom') ), '');
+						echo Form::control_group(Form::label('password', 'New password'),
+						Form::password('password', array('class' => 'input-large')), '');
 					}
 
-					echo Form::actions(array(Buttons::primary_submit('Edit Client')));
+						echo Form::control_group(Form::label('group', 'Groupe'),
+						Form::select( 'group', array('1' => 'Admin', '2' => 'Client'), $client->group ) );
+
+					echo Form::actions(array(Buttons::primary_submit('Create Client')));
 				?>
 			
-			</div><!-- / div.span5 -->
+			</div>
+
 			{{ Form::close() }}
 			<div class="span5">
-				<h4>Nombre de markers: <small>{{ $marker_count }}</small></h4>
+				<h4>Nombre de markers: <small></small></h4>
 
 				{{ Buttons::link('Add marker for this client', 'home/new_marker/'.$client->id) }}
 

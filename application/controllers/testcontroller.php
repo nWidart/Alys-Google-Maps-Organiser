@@ -1,7 +1,6 @@
 <?php
 
-
-class Company_Controller extends Base_Controller
+class Testcontroller_Controller extends Base_Controller
 {
 	public $restful = true;
 

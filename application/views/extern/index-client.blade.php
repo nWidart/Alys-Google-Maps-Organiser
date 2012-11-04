@@ -17,9 +17,9 @@
 		<div class="span4">
 			<ul class="nav nav-list">
 				<li class="nav-header">Actions</li>
-				<li class="active"><a href="{{ URL::to_route(''.Session::get('client_name_s').'') }}">Accueil</a></li>
+				<li class="active"><a href="{{ URL::to_route(strtolower(Auth::user()->username)) }}">Accueil</a></li>
 				<li class=""><a href="{{ URL::to_route('client_marker_list') }}">Liste d'adresses</a></li>
-				<li><a href="{{ URL::to_route('client_new_marker',Session::get('client_id_s')) }}">Ajouter une adresse</a></li>
+				<li><a href="{{ URL::to_route('client_new_marker') }}">Ajouter une adresse</a></li>
 			</ul>
 		</div>
 

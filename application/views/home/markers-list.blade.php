@@ -56,7 +56,7 @@ Markers list | Alys Google Maps manager
 							<td>{{ $marker->lat }}</td>
 							<td>{{ $marker->lng }}</td>
 							<td>{{ $marker->type }}</td>
-							<td>{{ $marker->societe }}</td>
+							<td>{{ $marker->username }}</td>
 							<td>
 								  <a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
 								  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
