@@ -1,7 +1,7 @@
 @layout('template.client')
 
 @section('title')
-{{Session::get('client_name_s')}} | Alys Google Maps manager
+{{ Auth::user()->username }} | Alys Google Maps manager
 @endsection
 
 
@@ -10,7 +10,7 @@
 	<div class="row-fluid">
 		<div class="span8">
 			<p class="lead">
-				Bienvenue {{ Session::get('client_name_s') }}, <br />
+				Bienvenue {{ Auth::user()->username }}, <br />
 				Dans cette administration vous pouvez gérer votre Google Map.
 			</p>
 		</div>

@@ -41,29 +41,31 @@ if(!Request::cli())
 	 * 
 	 */
 	Route::any('admin/list', array('as' => 'marker_list', 'uses' => 'home@marker', 'before' => 'auth') );
-	Route::any('client/listing', array('before' => 'auth', 'uses' => 'client@listing') );
-	Route::any('client/new_client', array('before' => 'auth', 'uses'=>'client@new_client'));
+	Route::any('client/listing', array('before' => 'auth', 'uses' => 'client@listing', 'before' => 'auth') );
+	Route::any('client/new_client', array('before' => 'auth', 'uses'=>'client@new_client', 'before' => 'auth'));
 	Route::any('new', array('as' => 'new_marker', 'uses' => 'home@new_marker', 'before' => 'auth') );
-	Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker') );
+	Route::any('edit/marker/(:any)', array('as' => 'edit_marker', 'uses' => 'home@edit_marker', 'before' => 'auth') );
 	Route::any('geocode/index', array('uses' => 'geocode@index', 'before' => 'auth'));
 
-
-	Route::any(Session::get('client_name_s').'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
-	Route::any(Session::get('client_name_s').'/new/(:any)', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
-	Route::any(Session::get('client_name_s').'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
+	if ( Auth::check() )
+	{
+		Route::any( strtolower(Auth::user()->username) .'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
+		Route::any( strtolower(Auth::user()->username) .'/new', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
+		Route::any( strtolower(Auth::user()->username) .'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
+	}
 	/**
 	 * Routes pour les clients
 	 * 
 	 */
 
 	// Route pour Bulmann
-	Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@buhlmann') );
+	Route::get('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
 
 	// Route pour Lemmens
-	Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@lemmens') );
+	Route::get('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
 
 	// Route pour testing
-	Route::get('testing', array('as' => 'testing', 'uses' => 'company@testing') );
+	Route::get('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
 
 	Route::controller(Controller::detect());
 
@@ -86,7 +88,10 @@ if(!Request::cli())
 		if ( Auth::attempt($userdata) )
 		{
 			// logged in
-			return Redirect::to_action('home@index');
+			if ( Auth::user()->group == 1 )
+				return Redirect::to_action('home@index');
+			else
+				return Redirect::to_route( strtolower(Auth::user()->username) );
 		}
 		else
 		{
@@ -174,4 +179,16 @@ Route::filter('csrf', function()
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
+});
+Route::filter('client', function()
+{
+	if ( Auth::check() )
+	{
+		if ( !Auth::user()->group == 2 ) return Redirect::to('login');	
+	}
+	else
+	{
+		return Redirect::to('login');
+	}
+	
 });

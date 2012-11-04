@@ -97,7 +97,7 @@ Add a marker| Alys Google Maps manager
 			}
 			
 			echo Form::control_group(Form::label('client', 'Client'),
-			Form::select('client', $clients, $current_client));
+			Form::select('client', $clients));
 
 			echo Form::actions(array(Buttons::primary_submit('Add new')));
 

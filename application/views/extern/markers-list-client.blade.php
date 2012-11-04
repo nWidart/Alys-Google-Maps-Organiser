@@ -8,7 +8,9 @@ Markers list | Alys Google Maps manager
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
-			<a href="{{ URL::to_route('new_marker',Session::get('client_id_s')) }}"><button class="btn btn-primary {{ Session::get('client_name_s') }}">New Marker</button></a>
+			<a href="{{ URL::to_route('client_new_marker') }}">
+				<button class="btn btn-primary {{strtolower(Auth::user()->username)}}">New Marker</button>
+			</a>
 		</div>
 	</div>
 </div>

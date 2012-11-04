@@ -18,11 +18,11 @@ class Home_Controller extends Base_Controller {
 			$data[$client->id] = $client->societe;
 		}
 
-		if (Session::has('client_id_s'))
+		if ( Auth::user()->group == 2 )
 		{
 			$markers = DB::table('markers')
 				->join('clients' ,'markers.client_id', '=','clients.id')
-				->where('client_id', '=', Session::get('client_id_s'))
+				->where('client_id', '=', Auth::user()->client_id)
 				->get(array(
 					'markers.id', 
 					'markers.name', 
@@ -84,26 +84,23 @@ class Home_Controller extends Base_Controller {
 	}
 
 
-	public function get_new_marker($id = null)
+	public function get_new_marker()
 	{
 		$clients = Client::all();
-		$client_id = $id;
 
 		$data = array();
 		foreach ($clients as $client) {
 			$data[$client->id] = $client->societe;
 		}
-		if (Session::has('client_name_s'))
+		if (Auth::user()->group == 2)
 		{
 			return View::make('extern.add-marker-client')
-				->with('clients', $data)
-				->with('current_client', $client_id);
+				->with('clients', $data);
 		}
 		else
 		{
 			return View::make('home.add-marker')
-				->with('clients', $data)
-				->with('current_client', $client_id);
+				->with('clients', $data);
 		}
 		
 	}
@@ -141,7 +138,7 @@ class Home_Controller extends Base_Controller {
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
+			$marker->client_id = (Auth::user()->group == 2) ? Auth::user()->client_id : $input['client'];
 			$marker->rem1 = Input::get('rem1', '');
 			$marker->rem2 = Input::get('rem2', '');
 			$marker->rem3 = Input::get('rem3', '');
@@ -164,7 +161,7 @@ class Home_Controller extends Base_Controller {
 		foreach ($clients as $client) {
 			$data[$client->id] = $client->societe;
 		}
-		if (Session::has('client_name_s'))
+		if ( Auth::user()->group == 2 )
 		{
 			return View::make('extern.edit-marker-client')->with('marker', $marker)->with('clients', $data);
 		}
@@ -208,7 +205,7 @@ class Home_Controller extends Base_Controller {
 			$marker->lat = $input['lat'];
 			$marker->lng = $input['lng'];
 			$marker->type = $input['type'];
-			$marker->client_id = (Session::has('client_id_s')) ? Session::get('client_id_s') : $input['client'];
+			$marker->client_id = (Auth::user()->group == 2) ? Auth::user()->client_id : $input['client'];
 			$marker->rem1 = Input::get('rem1', '');
 			$marker->rem2 = Input::get('rem2', '');
 			$marker->rem3 = Input::get('rem3', '');

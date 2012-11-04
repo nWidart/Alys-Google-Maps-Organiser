@@ -13,29 +13,20 @@
 <body>
 	<!-- HEADER -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner {{ Session::get('client_name_s') }}">
+		<div class="navbar-inner {{ strtolower(Auth::user()->username) }}">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="{{ URL::to_route(''.Session::get('client_name_s').'') }}" name="top">
-					<?php
-					if (Session::has('client_name_s'))
-					{
-						echo Session::get('client_name_s');
-					}
-					else
-					{
-						echo "Default";
-					}
-					?>
+				<a class="brand" href="{{ URL::to_route(''.strtolower(Auth::user()->username).'') }}" name="top">
+					{{ strtolower(Auth::user()->username) }}
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="dropdown {{ Session::get('client_name_s') }}">
-							<a class="dropdown-toggle{{ Session::get('client_name_s') }}" data-toggle="dropdown" href="#">
+						<li class="dropdown {{ strtolower(Auth::user()->username) }}">
+							<a class="dropdown-toggle{{ strtolower(Auth::user()->username) }}" data-toggle="dropdown" href="#">
 								<i class="icon-book icon-white"></i> Adresses	<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -44,6 +35,32 @@
 							</ul>
 						</li>
 					</ul>
+					<div class="pull-right">
+						<ul class="nav pull-right">
+							@if ( Auth::check() )
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ Auth::user()->username }} <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
+									<li class="divider"></li>
+									<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
+								</ul>
+							</li>
+							@else
+							<li class="dropdown">
+								<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+									{{ Form::open('login') }}
+										<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
+										<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">										
+										<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+
+									{{ Form::close() }}
+								</div>
+							</li>
+							@endif
+
+						</ul>
+					</div>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
@@ -62,9 +79,9 @@
 			<ul class="footer-links">
 				<li><a href="http://www.alys.be">Alys</a></li>
 			</ul>
-			<p class="pull-right">
+			<!-- <p class="pull-right">
 				<a href="{{ URL::to_action('home@delete_session') }}"><small>Admin flush</small></a>
-			</p>
+			</p> -->
 		</div>
 	</footer>
 
