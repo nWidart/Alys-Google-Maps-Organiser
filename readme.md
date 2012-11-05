@@ -1,67 +1,30 @@
-# [Laravel](http://laravel.com) - A PHP Framework For Web Artisans
+# Alys Google Maps Organiser
+***
 
-Laravel is a clean and classy framework for PHP web development. Freeing you
-from spaghetti code, Laravel helps you create wonderful applications using
-simple, expressive syntax. Development should be a creative experience that you
-enjoy, not something that is painful. Enjoy the fresh air.
+## Ajouter un nouveau client
+En __2__ étapes:
 
-[Official Website & Documentation](http://laravel.com)
+1. Création du client ( login & mot de passe )
+2. Ajout d'une ligne de code pour l'url ( ndd/__nomDuClient__)
 
-## Feature Overview
+### 1. Ajout du client
+L'ajout du client se fait via l'administration, à l'URL: `/client/listing`
 
-- Simple routing using Closures or controllers.
-- Views and templating.
-- Driver based session and cache handling.
-- Database abstraction with query builder.
-- Authentication.
-- Migrations.
-- PHPUnit Integration.
-- A lot more.
 
-## A Few Examples
+* Le champ __Société__, sera le login du client. <br/>
+*Important*: Bien utiliser le nom de société, ceci va être utiliser pour créer le layout du client (ajouter les bonnes classes CSS, header>h1, etc.) 
+* Le __Password__, ne sera plus visible après donc bien retenir.
 
-### Hello World:
 
-```php
-<?php
+### 2. Ajout du code
+Il suffit d'ouvrir le fichier `application/routes.php`
 
-Route::get('/', function()
-{
-	return "Hello World!";
-});
+Esnuite ajoutez une nouvelle ligne de code sous la partie "__Routes pour clients__"
+
+Copiez / coller ceci:
+
+```
+Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index', 'before' => 'client') );
 ```
 
-### Passing Data To Views:
-
-```php
-<?php
-
-Route::get('user/(:num)', function($id)
-{
-	$user = DB::table('users')->find($id);
-
-	return View::make('profile')->with('user', $user);
-});
-```
-
-### Redirecting & Flashing Data To The Session:
-
-```php
-<?php
-
-return Redirect::to('profile')->with('message', 'Welcome Back!');
-```
-
-## Contributing to Laravel
-
-Contributions are encouraged and welcome; however, please review the Developer
-Certificate of Origin in the "license.txt" file included in the repository. All
-commits must be signed off using the `-s` switch.
-
-```bash
-git commit -s -m "this commit will be signed off automatically!"
-```
-
-## License
-
-Laravel is open-sourced software licensed under the MIT License.
+Il suffit de changer 2 fois '__utilisateur__' par le login choissi à l'étape 1.
