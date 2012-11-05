@@ -25,8 +25,8 @@ class Client_Controller extends Base_Controller
 	{
 		$input = Input::get();
 		$rules = array(
-			'username' => 'required|max:100|alpha_num|unique:users',
-			'password' => 'required|max:100|alpha_num',
+			'username' => 'required|max:100|alpha_dash|unique:users',
+			'password' => 'required|max:100|alpha_dash',
 		);
 		$v = Validator::make($input, $rules);
 
