@@ -21,6 +21,7 @@ Route::any('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'befor
 Route::any('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
 
 Route::any('testuser2', array('as' => 'testuser2', 'uses' => 'company@index', 'before' => 'client') );
+Route::any('tcr-group', array('as' => 'tcr-group', 'uses' => 'company@index', 'before' => 'client') );
 
 
 /*
