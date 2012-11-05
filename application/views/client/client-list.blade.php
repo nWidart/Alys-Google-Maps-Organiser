@@ -70,6 +70,9 @@ Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index'
 					@endif
 				  </tbody>
 				</table>
+				<p>
+					<span class="label label-important">Important</span> <a href="https://github.com/nWidart/Alys-Google-Maps-Organiser/blob/master/readme.md" target="_blank">Comment créer & ajouter un nouveau client.</a>
+				</p>
 			</div><!-- / div.well -->
 		</div><!-- / div.span6 -->
 		<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

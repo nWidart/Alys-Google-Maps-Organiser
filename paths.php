@@ -24,7 +24,7 @@
 $environments = array(
 
 	'local' => array('http://gmaps-org*', '*.dev'),
-	'production' => array('http://alys-gmaps.pagodabox.com')
+	'production' => array('http://alys-gmaps.pagodabox.com'),
 
 );
 

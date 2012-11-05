@@ -19,7 +19,7 @@ L'ajout du client se fait via l'administration, à l'URL: `/client/listing`
 ### 2. Ajout du code
 Il suffit d'ouvrir le fichier `application/routes.php`
 
-Esnuite ajoutez une nouvelle ligne de code sous la partie "**Routes pour clients**"
+Esnuite ajoutez une nouvelle ligne de code sous la partie **"Routes pour clients"**
 
 Copiez / coller ceci:
 
@@ -27,4 +27,4 @@ Copiez / coller ceci:
 Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index', 'before' => 'client') );
 ```
 
-Il suffit de changer 2 fois '**utilisateur**' par le login choissi à l'étape 1.
+Il suffit de changer 2 fois **'utilisateur'** par le login choissi à l'étape 1.

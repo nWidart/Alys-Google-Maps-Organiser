@@ -36,4 +36,6 @@ intermediate
 publish
 
 public/img/upload
+config/live
+config/live/*
 .idea
