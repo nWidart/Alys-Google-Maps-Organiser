@@ -18,7 +18,7 @@ Client list | Alys Google Maps manager
 		<div class="span8">
 			<div class="alert alert-block fade in">
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				Don't forget to add correct route to the routes file!
+				Don't forget to add correct route to the <code>application/routes.php</code> file!
 				<pre>
 Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index', 'before' => 'client') );
 				</pre>
@@ -28,7 +28,7 @@ Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index'
 	</div>
 	<div class="row-fluid">
 		<div class="span3">
-			<a href="{{ URL::to_action('client@new_client') }}"><button class="btn btn-primary">New Client</button></a>
+			<a href="{{ URL::to_action('client@new_client') }}"><button class="btn btn-success">New Client</button></a>
 		</div>
 	</div>
 </div>
@@ -40,17 +40,21 @@ Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index'
 				<table class="table">
 				  <thead>
 					<tr>
+						<th style="width: 36px;"></th>
 					  <th>#</th>
 					  <th>Société(login)</th>
 					  <th>Password</th>
 					  <th>Groupe</th>
-					  <th style="width: 36px;"></th>
 					</tr>
 				  </thead>
 				  <tbody>
 				  	@if( !empty($clients) )
 						@foreach ($clients as $client)
 							<tr>
+								<td>
+									<a href="{{ URL::to_action('client@edit_client/') }}/{{ $client->id }}"><i class="icon-pencil"></i></a>
+									<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+								</td>
 								<td>{{ $client->id }}</td>
 								<td>{{ $client->username }}</td>
 								<td>**********</td>
@@ -61,10 +65,6 @@ Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index'
 										Client
 									@endif
 								</td>
-								<td>
-									  <a href="{{ URL::to_action('client@edit_client/') }}/{{ $client->id }}"><i class="icon-pencil"></i></a>
-									  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-								  </td>
 							</tr>
 						@endforeach
 					@endif

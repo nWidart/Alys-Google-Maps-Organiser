@@ -1,34 +1,32 @@
 <?php
+/**
+* Routes pour les clients
+* 
+* Après avoir créer le client depuis /client/new_client
+* Ajouter :
+* 
+* Route::any('utilisateur', array('as' => 'utilisateur', 'uses' => 'company@index', 'before' => 'client') );
+* 
+* En remplacent 'utilisateur', par le login (nom de société)
+* 
+*/
+
+// Route pour Bulmann
+Route::any('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
+
+// Route pour Lemmens
+Route::any('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
+
+// Route pour testing
+Route::any('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
+
+Route::any('testuser2', array('as' => 'testuser2', 'uses' => 'company@index', 'before' => 'client') );
+
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Application Routes // NE PAS TOUCHER
 |--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your application using Laravel's RESTful routing and it
-| is perfectly suited for building large applications and simple APIs.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post(array('hello', 'world'), function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
 |
 */
 Route::controller(array('company', 'geocode', 'client', 'home'));
@@ -53,21 +51,7 @@ if(!Request::cli())
 		Route::any( strtolower(Auth::user()->username) .'/new', array('as' => 'client_new_marker', 'uses' => 'home@new_marker', 'before' => 'client') );
 		Route::any( strtolower(Auth::user()->username) .'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker', 'before' => 'client') );
 	}
-	/**
-	 * Routes pour les clients
-	 * 
-	 */
-
-	// Route pour Bulmann
-	Route::any('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
-
-	// Route pour Lemmens
-	Route::any('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
-
-	// Route pour testing
-	Route::any('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
-
-	Route::any('testuser2', array('as' => 'testuser2', 'uses' => 'company@index', 'before' => 'client') );
+	
 
 
 	/**

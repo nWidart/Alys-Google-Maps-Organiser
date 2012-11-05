@@ -50,7 +50,7 @@
 									{{ Form::open('login') }}
 										<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
 										<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">										
-										<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+										<input class="btn btn-info btn-block" type="submit" id="sign-in" value="Sign In">
 
 									{{ Form::close() }}
 								</div>
@@ -77,9 +77,6 @@
 			<ul class="footer-links">
 				<li><a href="http://www.alys.be">Alys</a></li>
 			</ul>
-			<!-- <p class="pull-right">
-				<a href="{{ URL::to_action('home@delete_session') }}"><small>Admin flush</small></a>
-			</p> -->
 		</div>
 	</footer>
 

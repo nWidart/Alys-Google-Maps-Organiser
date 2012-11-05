@@ -8,16 +8,17 @@ Markers list | Alys Google Maps manager
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
-			<a href="{{ URL::to_action('home@new_marker') }}"><button class="btn btn-primary">New Marker</button></a>
-			<a href="{{ URL::to_action('home@delete_session') }}"><button class="btn">Flush</button></a>
+			<a href="{{ URL::to_route('new_marker') }}"><button class="btn btn-success">New Marker</button></a>
+			<a href="{{ URL::to_action('home@marker') }}"><button class="btn btn-info">Show all</button></a>
 		</div>
 		<div class="pull-right">
 			{{ Form::open() }}
 			@if (isset($active_client))
-			{{ Form::append_buttons(Form::select('client', $clients, $active_client), Form::submit('Filter')) }}
+			{{ Form::append_buttons(Form::select('client', $clients, $active_client), Form::submit('Filter', array('class' => 'btn-info'))) }}
 			@else
-			{{ Form::append_buttons(Form::select('client', $clients), Form::submit('Filter')) }}
+			{{ Form::append_buttons(Form::select('client', $clients), Form::submit('Filter', array('class' => 'btn-info'))) }}
 			{{ Form::close() }}
+
 			@endif
 		</div>
 	</div>
@@ -36,20 +37,24 @@ Markers list | Alys Google Maps manager
 			<table class="table">
 			  <thead>
 				<tr>
-				  <th>#</th>
-				  <th>Name</th>
-				  <th>Address</th>
-				  <th>Lat</th>
-				  <th>Long</th>
-				  <th>Type</th>
-				  <th>Client</th>
-				  <th style="width: 36px;"></th>
+					<th style="width: 36px;">E / D</th>
+					<th>#</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Lat</th>
+					<th>Long</th>
+					<th>Type</th>
+					<th>Client</th>
 				</tr>
 			  </thead>
 			  <tbody>
 			  	@if( !empty($markers) )
 					@foreach ($markers as $marker)
 						<tr>
+							<td>
+								<a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
+								<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+							</td>
 							<td>{{ $marker->id }}</td>
 							<td>{{ $marker->name }}</td>
 							<td>{{ $marker->address }}</td>
@@ -57,10 +62,6 @@ Markers list | Alys Google Maps manager
 							<td>{{ $marker->lng }}</td>
 							<td>{{ $marker->type }}</td>
 							<td>{{ $marker->username }}</td>
-							<td>
-								  <a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
-								  <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-							  </td>
 						</tr>
 					@endforeach
 				@endif

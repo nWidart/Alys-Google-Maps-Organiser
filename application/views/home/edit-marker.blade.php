@@ -96,7 +96,7 @@ Edit a marker| Alys Google Maps manager
 			echo Form::control_group(Form::label('client', 'Client'),
 			Form::select('client', $clients, $marker->user_id));
 
-			echo Form::actions(array(Buttons::primary_submit('Edit')));
+			echo Form::actions(array(Buttons::success_submit( 'Edit' ) ));
 
 		?>
 		</div>
@@ -137,7 +137,6 @@ Edit a marker| Alys Google Maps manager
 @section('scripts')
 <script type="text/javascript">
 $(document).ready(function(){
-
 	$("#address").on("change", function(){
 		var geocoder = new google.maps.Geocoder();
 		var address = $("#address").val();

@@ -23,7 +23,7 @@
 				<a class="brand" href="{{ URL::to_route('dashboard') }}" name="top">Alys Google Maps Organiser</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="{{ URL::to_action('home@index') }}"><i class="icon-home icon-white"></i> Home</a></li>
+						<li><a href="{{ URL::to_route('dashboard') }}"><i class="icon-home icon-white"></i> Home</a></li>
 						<li class="divider-vertical"></li>
 						@if ( Auth::check() )
 						<li class="dropdown">
@@ -63,7 +63,7 @@
 									{{ Form::open('login') }}
 										<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
 										<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">										
-										<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+										<input class="btn btn-info btn-block" type="submit" id="sign-in" value="Sign In">
 
 									{{ Form::close() }}
 								</div>
