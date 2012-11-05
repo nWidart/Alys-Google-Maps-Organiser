@@ -5,7 +5,7 @@
 En **2** étapes:
 
 1. Création du client ( login & mot de passe )
-2. Ajout d'une ligne de code pour l'url ( ndd/**nomDuClient**)
+2. Ajout d'une ligne de code pour l'url ( ndd/**nomDuClient** )
 
 ### 1. Ajout du client
 L'ajout du client se fait via l'administration, à l'URL: `/client/listing`
@@ -19,7 +19,7 @@ L'ajout du client se fait via l'administration, à l'URL: `/client/listing`
 ### 2. Ajout du code
 Il suffit d'ouvrir le fichier `application/routes.php`
 
-Esnuite ajoutez une nouvelle ligne de code sous la partie **"Routes pour clients"**
+Ensuite ajoutez une nouvelle ligne de code sous la partie **"Routes pour clients"**
 
 Copiez / coller ceci:
 
