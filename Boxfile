@@ -18,7 +18,7 @@ web1:
     - eaccelerator
     - memcached
     - curl
-    - PHP GD
+    - gd
   after_deploy:
     - "rm -f storage/cache/*"
     - "rm -f storage/views/*"
