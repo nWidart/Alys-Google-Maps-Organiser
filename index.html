@@ -36,12 +36,12 @@
 
 <ol>
 <li>Création du client ( login &amp; mot de passe )</li>
-<li>Ajout d'une ligne de code pour l'url ( ndd/__nomDuClient__)</li>
+<li>Ajout d'une ligne de code pour l'url ( ndd/**nomDuClient**)</li>
 </ol><h3>1. Ajout du client</h3>
 
 <p>L'ajout du client se fait via l'administration, à l'URL: <code>/client/listing</code></p>
 
-<p><img src="/images/admin_nv_client.png" alt="New Client"></p>
+<p><img src="images/admin_nv_client.png" alt="New Client"></p>
 
 <ul>
 <li>Le champ <strong>Société</strong>, sera le login du client. <br><em>Important</em>: Bien utiliser le nom de société, ceci va être utiliser pour créer le layout du client (ajouter les bonnes classes CSS, header&gt;h1, etc.) </li>
@@ -50,14 +50,14 @@
 
 <p>Il suffit d'ouvrir le fichier <code>application/routes.php</code></p>
 
-<p>Esnuite ajoutez une nouvelle ligne de code sous la partie "__Routes pour clients__"</p>
+<p>Esnuite ajoutez une nouvelle ligne de code sous la partie "**Routes pour clients**"</p>
 
 <p>Copiez / coller ceci:</p>
 
 <pre><code>Route::any('utilisateur', array('as' =&gt; 'utilisateur', 'uses' =&gt; 'company@index', 'before' =&gt; 'client') );
 </code></pre>
 
-<p>Il suffit de changer 2 fois '__utilisateur__' par le login choissi à l'étape 1.</p>
+<p>Il suffit de changer 2 fois '**utilisateur**' par le login choissi à l'étape 1.</p>
         </section>
 
         <aside id="sidebar">
