@@ -10,6 +10,7 @@ web1:
     - /storage/sessions
     - /storage/views
     - /storage/work
+    - /public/img/uploads
   document_root: /public
   php_version: 5.3.8
   php_extensions:
