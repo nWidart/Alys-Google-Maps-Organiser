@@ -40,8 +40,6 @@
 							@if ( Auth::check() )
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ Auth::user()->username }} <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
-									<li class="divider"></li>
 									<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
 								</ul>
 							</li>

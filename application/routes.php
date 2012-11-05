@@ -49,9 +49,9 @@ if(!Request::cli())
 
 	if ( Auth::check() )
 	{
-		Route::any( strtolower(Auth::user()->username) .'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker') );
-		Route::any( strtolower(Auth::user()->username) .'/new', array('as' => 'client_new_marker', 'uses' => 'home@new_marker') );
-		Route::any( strtolower(Auth::user()->username) .'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker') );
+		Route::any( strtolower(Auth::user()->username) .'/list', array('as' => 'client_marker_list', 'uses' => 'home@marker', 'before' => 'client') );
+		Route::any( strtolower(Auth::user()->username) .'/new', array('as' => 'client_new_marker', 'uses' => 'home@new_marker', 'before' => 'client') );
+		Route::any( strtolower(Auth::user()->username) .'/edit/marker/(:any)', array('as' => 'client_edit_marker', 'uses' => 'home@edit_marker', 'before' => 'client') );
 	}
 	/**
 	 * Routes pour les clients
@@ -76,7 +76,10 @@ if(!Request::cli())
 	 */
 	Route::get('login', function()
 	{
-		return View::make('login');
+		if (Session::has('denied'))
+			return View::make('login')->with('denied', 'Please login to access that page');
+		else
+			return View::make('login');
 	});
 
 	Route::post('login', function()
@@ -130,7 +133,7 @@ if(!Request::cli())
 
 Event::listen('404', function()
 {
-	return Response::error('404');
+	return Redirect::to('login');
 });
 
 Event::listen('500', function()
@@ -185,10 +188,12 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		return Redirect::to('login');	
+		Session::flash('denied', true);
+		return Redirect::to('login');
 	}
 	else
 	{
+		Session::flash('denied', true);
 		if ( !Auth::user()->group === 1 ) return Redirect::to('login');
 	}
 });
@@ -196,10 +201,12 @@ Route::filter('client', function()
 {
 	if ( Auth::check() )
 	{
-		if ( !Auth::user()->group == 2 ) return Redirect::to('login');	
+		Session::flash('denied', true);
+		if ( !Auth::user()->group == 2 ) return Redirect::to('login');
 	}
 	else
 	{
+		Session::flash('denied', true);
 		return Redirect::to('login');
 	}
 	

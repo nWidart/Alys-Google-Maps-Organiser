@@ -6,21 +6,27 @@ Login
 
 @section('content')
 <div class="container">
-	<div class="row-fluid">
-		{{ Form::open('login') }}
-		<!-- check for login errors flash var -->
-		@if (Session::has('login_errors'))
-		<span class="error">Username or password incorrect.</span>
-		@endif
-		<!-- username field -->
-		<p>{{ Form::label('username', 'Username') }}</p>
-		<p>{{ Form::text('username') }}</p>
-		<!-- password field -->
-		<p>{{ Form::label('password', 'Password') }}</p>
-		<p>{{ Form::password('password') }}</p>
-		<!-- submit button -->
-		<p>{{ Form::submit('Sign In') }}</p>
-		{{ Form::close() }}
+	<div class="row">
+		<div class="span4 offset4 well">
+			{{ Form::open('login') }}
+				<legend>Please Sign In</legend>
+          	@if (Session::has('login_errors'))
+				<div class="alert alert-error fade in">
+					Username or password incorrect.
+					<button type="button" class="close" data-dismiss="alert">×</button>
+				</div>
+			@endif
+			@if(Session::has('denied'))
+				<div class="alert alert-warning fade in">
+					{{ $denied }}
+					<button type="button" class="close" data-dismiss="alert">×</button>
+				</div>
+			@endif
+			{{ Form::text('username', null, array('class' => 'span4', 'placeholder' => 'Username')) }}
+			{{ Form::password('password', array('class' => 'span4', 'placeholder' => 'Password')) }}
+			{{ Buttons::info_submit('Sign In', array('class' => 'btn-block'))}}
+			{{ Form::close() }}    
+		</div>
 	</div>
 </div>
 @endsection
