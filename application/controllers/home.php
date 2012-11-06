@@ -23,7 +23,7 @@ class Home_Controller extends Base_Controller {
 			$markers = DB::table('markers')
 				->join('users' ,'markers.user_id', '=','users.id')
 				->where('user_id', '=', Auth::user()->id)
-				->paginate(10, array(
+				->paginate(13, array(
 					'markers.id', 
 					'markers.name', 
 					'markers.address', 
@@ -41,7 +41,7 @@ class Home_Controller extends Base_Controller {
 		{
 			$markers = DB::table('markers')
 				->join('users' ,'markers.user_id', '=','users.id')
-				->paginate(10, array(
+				->paginate(13, array(
 					'markers.id', 
 					'markers.name', 
 					'markers.address', 
