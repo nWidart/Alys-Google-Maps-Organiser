@@ -31,7 +31,7 @@ Markers list | Alys Google Maps manager
 				  </thead>
 				  <tbody>
 				  	@if( !empty($markers) )
-						@foreach ($markers as $marker)
+						@foreach ($markers->results as $marker)
 							<tr>
 								<td>
 									<a href="{{ URL::to_route('client_edit_marker',$marker->id) }}"><i class="icon-pencil"></i></a>
@@ -50,8 +50,11 @@ Markers list | Alys Google Maps manager
 							You don't have any markers. <a href="{{ URL::to_route('client_new_marker',Session::get('client_id_s')) }}">Start by adding a marker here.</a>
 						</p>
 					@endif
+
 				  </tbody>
+
 				</table>
+				<?php echo $markers->links(3, Paginator::ALIGN_CENTER); ?>
 			</div>
 		</div><!-- / .span8 -->
 		<div class="span3">

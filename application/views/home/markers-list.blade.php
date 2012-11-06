@@ -49,7 +49,7 @@ Markers list | Alys Google Maps manager
 			  </thead>
 			  <tbody>
 			  	@if( !empty($markers) )
-					@foreach ($markers as $marker)
+					@foreach ($markers->results as $marker)
 						<tr>
 							<td>
 								<a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
@@ -67,6 +67,7 @@ Markers list | Alys Google Maps manager
 				@endif
 			  </tbody>
 			</table>
+			<?php echo $markers->links(3, Paginator::ALIGN_CENTER); ?>
 		</div>
 		<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">

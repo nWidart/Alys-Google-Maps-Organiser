@@ -23,15 +23,16 @@ class Home_Controller extends Base_Controller {
 			$markers = DB::table('markers')
 				->join('users' ,'markers.user_id', '=','users.id')
 				->where('user_id', '=', Auth::user()->id)
-				->get(array(
+				->paginate(10, array(
 					'markers.id', 
 					'markers.name', 
 					'markers.address', 
 					'markers.lat',
 					'markers.lng',
 					'markers.type',
-					'users.username'					
+					'users.username'
 				));
+
 			return View::make('extern.markers-list-client')
 				->with('markers', $markers)
 				->with('clients', $data);
@@ -40,7 +41,7 @@ class Home_Controller extends Base_Controller {
 		{
 			$markers = DB::table('markers')
 				->join('users' ,'markers.user_id', '=','users.id')
-				->get(array(
+				->paginate(10, array(
 					'markers.id', 
 					'markers.name', 
 					'markers.address', 

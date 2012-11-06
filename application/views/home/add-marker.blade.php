@@ -44,7 +44,7 @@ Add a marker| Alys Google Maps manager
 			{
 				echo Form::control_group(Form::label('address', 'Adresse'),
 				Form::xlarge_text('address', Input::old('address') ), '',
-				Form::block_help('Longitude & Latitude are generated automaticly.'));
+				Form::block_help('Longitude & Latitude are generated automaticly. <a href="http://ctrlq.org/maps/address/" target="_blank">No address generated ?</a>'));
 			}
 				//echo '<div class="span3 offset2"><button id="address_btn" class="btn btn-info btn-mini" type="button">Calculate coords</button></div><br/><br/>';
 			
