@@ -23,7 +23,7 @@ Add a marker| Alys Google Maps manager
 				{
 					echo Form::control_group(
 					Form::label('name', 'Nom du marker'),
-					Form::xlarge_text('name', null, array('placeholder' => 'nom') ),
+					Form::xlarge_text('name', Input::old('name'), array('placeholder' => 'nom') ),
 					'error',
 					Form::inline_help( $errors->first('name') ));
 				}
@@ -31,57 +31,57 @@ Add a marker| Alys Google Maps manager
 				{
 					echo Form::control_group(
 						Form::label('name', 'Nom du marker'),
-						Form::xlarge_text('name', null, array('placeholder' => 'nom') ),
+						Form::xlarge_text('name', Input::old('name'), array('placeholder' => 'nom') ),
 						'');
 				}
 
 				if ( $errors->has('address') )
 				{
 					echo Form::control_group(Form::label('address', 'Adresse'),
-					Form::xlarge_text('address'), 'error',
+					Form::xlarge_text('address', Input::old('address') ), 'error',
 					Form::inline_help( $errors->first('address') ));
 				}
 				else
 				{
 					echo Form::control_group(Form::label('address', 'Adresse'),
-					Form::xlarge_text('address'), '',
+					Form::xlarge_text('address', Input::old('address') ), '',
 					Form::block_help('Longitude & Latitude are generated automaticly.'));
 				}
 				
 				if ( $errors->has('lat') )
 				{
 					echo Form::control_group(Form::label('lat', 'Latitude'),
-					Form::xlarge_text('lat'), 'error',
+					Form::xlarge_text('lat', Input::old('lat') ), 'error',
 					Form::inline_help( $errors->first('lat') ));
 				}
 				else
 				{
 					echo Form::control_group(Form::label('lat', 'Latitude'),
-					Form::xlarge_text('lat'), '');
+					Form::xlarge_text('lat', Input::old('lat') ), '');
 				}
 
 				if ( $errors->has('lng') )
 				{
 					echo Form::control_group(Form::label('lng', 'Longitude'),
-					Form::xlarge_text('lng'), 'error',
+					Form::xlarge_text('lng', Input::old('lng')), 'error',
 					Form::inline_help( $errors->first('lng') ));
 				}
 				else
 				{
 					echo Form::control_group(Form::label('lng', 'Longitude'),
-					Form::xlarge_text('lng'), '');
+					Form::xlarge_text('lng', Input::old('lng') ), '');
 				}
 				
 				if ( $errors->has('type') )
 				{
 					echo Form::control_group(Form::label('type', 'Type'),
-					Form::xlarge_text('type'), 'error',
+					Form::xlarge_text('type', Input::old('type') ), 'error',
 					Form::inline_help( $errors->first('type') ));
 				}
 				else
 				{
 					echo Form::control_group(Form::label('type', 'Type'),
-					Form::xlarge_text('type'), '');
+					Form::xlarge_text('type', Input::old('type') ), '');
 				}
 				if ( $errors->has('img_input') )
 				{
@@ -105,23 +105,23 @@ Add a marker| Alys Google Maps manager
 				<?php
 					$value = (isset($marker->rem1)) ? $marker->rem1 : '';
 					echo Form::control_group(Form::label('rem1', 'Remarque #1'),
-					   Form::xmedium_textarea('rem1', $value, array('rows' => '2')));
+					   Form::xmedium_textarea('rem1', Input::old('rem1'), array('rows' => '2')));
 			
 					$value = (isset($marker->rem2)) ? $marker->rem2 : '';
 					echo Form::control_group(Form::label('rem2', 'Remarque #2'),
-					   Form::xmedium_textarea('rem2', $value, array('rows' => '2')));
+					   Form::xmedium_textarea('rem2', Input::old('rem2'), array('rows' => '2')));
 				
 					$value = (isset($marker->rem3)) ? $marker->rem3 : '';
 					echo Form::control_group(Form::label('rem3', 'Remarque #3'),
-					   Form::xmedium_textarea('rem3', $value, array('rows' => '2')));
+					   Form::xmedium_textarea('rem3', Input::old('rem3'), array('rows' => '2')));
 
 					$value = (isset($marker->rem4)) ? $marker->rem4 : '';
 					echo Form::control_group(Form::label('rem4', 'Remarque #4'),
-					   Form::xmedium_textarea('rem4', $value, array('rows' => '2')));
+					   Form::xmedium_textarea('rem4', Input::old('rem4'), array('rows' => '2')));
 
-					$value = (isset($marker->rem4)) ? $marker->rem4 : '';
-					echo Form::control_group(Form::label('rem4', 'Remarque #4'),
-					   Form::xmedium_textarea('rem4', $value, array('rows' => '2')));
+					$value = (isset($marker->rem5)) ? $marker->rem5 : '';
+					echo Form::control_group(Form::label('rem5', 'Remarque #5'),
+					   Form::xmedium_textarea('rem5', Input::old('rem5'), array('rows' => '2')));
 				?>
 			</div>
 

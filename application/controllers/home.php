@@ -122,7 +122,7 @@ class Home_Controller extends Base_Controller {
 
 		if ( $v->fails() )
 		{
-			return Redirect::to_action('home@new_marker')->with_errors($v);
+			return Redirect::to_action('home@new_marker')->with_errors($v)->with_input();
 		}
 		else
 		{

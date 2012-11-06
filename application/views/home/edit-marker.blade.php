@@ -23,7 +23,7 @@ Edit a marker| Alys Google Maps manager
 			if ( $errors->has('name') )
 			{
 				echo Form::control_group(Form::label('name', 'Nom du marker'),
-				Form::xlarge_text('name', $marker->name, array('Placeholder' => 'Nom') ),
+				Form::xlarge_text('name', Input::old('name'), array('Placeholder' => 'Nom') ),
 				'error',
 				Form::inline_help( $errors->first('name') ));
 			}
@@ -36,7 +36,7 @@ Edit a marker| Alys Google Maps manager
 			if ( $errors->has('address') )
 			{
 				echo Form::control_group(Form::label('address', 'Adresse'),
-				Form::xlarge_text('address', $marker->address), 'error',
+				Form::xlarge_text('address', Input::old('address') ), 'error',
 				Form::inline_help( $errors->first('address') ));
 			}
 			else
@@ -49,7 +49,7 @@ Edit a marker| Alys Google Maps manager
 			if ( $errors->has('lat') )
 			{
 				echo Form::control_group(Form::label('lat', 'Latitude'),
-				Form::xlarge_text('lat', $marker->lat), 'error',
+				Form::xlarge_text('lat', Input::old('lat')), 'error',
 				Form::inline_help( $errors->first('lat') ));
 			}
 			else
@@ -61,7 +61,7 @@ Edit a marker| Alys Google Maps manager
 			if ( $errors->has('lng') )
 			{
 				echo Form::control_group(Form::label('lng', 'Longitude'),
-				Form::xlarge_text('lng', $marker->lng), 'error',
+				Form::xlarge_text('lng', Input::old('lng') ), 'error',
 				Form::inline_help( $errors->first('lng') ));
 			}
 			else
@@ -73,7 +73,7 @@ Edit a marker| Alys Google Maps manager
 			if ( $errors->has('type') )
 			{
 				echo Form::control_group(Form::label('type', 'Type'),
-				Form::xlarge_text('type', $marker->type), 'error',
+				Form::xlarge_text('type', Input::old('type') ), 'error',
 				Form::inline_help( $errors->first('type') ));
 			}
 			else

@@ -116,9 +116,9 @@ Edit a marker| Alys Google Maps manager
 					echo Form::control_group(Form::label('rem4', 'Remarque #4'),
 					   Form::xmedium_textarea('rem4', $value, array('rows' => '2')));
 
-					$value = (isset($marker->rem4)) ? $marker->rem4 : '';
-					echo Form::control_group(Form::label('rem4', 'Remarque #4'),
-					   Form::xmedium_textarea('rem4', $value, array('rows' => '2')));
+					$value = (isset($marker->rem5)) ? $marker->rem5 : '';
+					echo Form::control_group(Form::label('rem5', 'Remarque #5'),
+					   Form::xmedium_textarea('rem5', $value, array('rows' => '2')));
 				?>
 			</div>
 
