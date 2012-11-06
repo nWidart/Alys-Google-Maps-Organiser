@@ -18,31 +18,22 @@
 	$node = $dom->createElement("markers");
 	$parnode = $dom->appendChild($node); 
 
-	// Opens a connection to a MySQL server
+	try {
+		$conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch(PDOException $e) {
+		echo 'ERROR: ' . $e->getMessage();
+	}
 
-	$connection = mysql_connect ($host, $username, $password);
-	if (!$connection) {  die('Not connected : ' . mysql_error());} 
-
-	// Set the active MySQL database
-
-	$db_selected = mysql_select_db($database, $connection);
-	if (!$db_selected) {
-	  die ('Can\'t use db : ' . mysql_error());
-	} 
 
 	// Select all the rows in the markers table
-
-	$query = "SELECT * FROM gmaps_markers WHERE user_id = 5";
-	$result = mysql_query($query);
-	if (!$result) {  
-	  die('Invalid query: ' . mysql_error());
-	} 
+	$result = $conn->query('SELECT * FROM gmaps_markers WHERE user_id = 5');	
 
 	header("Content-type: text/xml"); 
 
 	// Iterate through the rows, adding XML nodes for each
 
-	while ($row = @mysql_fetch_assoc($result)){  
+	foreach ($result as $row) {
 	  // ADD TO XML DOCUMENT NODE  
 		$node = $dom->createElement("marker");
 		$newnode = $parnode->appendChild($node);
