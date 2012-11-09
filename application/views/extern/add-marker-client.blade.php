@@ -140,6 +140,39 @@ Add a marker| Alys Google Maps manager
 				<li class=""><a href="{{ URL::to_route('client_marker_list') }}"><i class="icon-align-justify"></i> Liste d'adresses</a></li>
 				<li class="active"><a href="{{ URL::to_route('client_new_marker') }}"><i class="icon-plus-sign"></i> Ajouter une adresse</a></li>
 			</ul>
+			<br />
+			<div style="display:none;">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Lettre</th>
+							<th>Equivalent ASCII</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php 
+							$accents = array(
+								'à' => '&aacute;',
+								'à' => '&agrave;',
+								'ç' => '&ccedil;',
+								'é' => '&eacute;',
+								'è' => '&egrave;',
+								'ê' => '&ecirc;',
+								'ë' => '&euml;',
+								'ü' => '&ugrave;',
+								'û' => '&ucirc;',
+								'ú' => '&uacute;'
+							);
+						?>
+						@foreach ($accents as $ac => $eq)
+						<tr>
+							<td>{{ $ac }}</td>
+							<td><code>{{ htmlspecialchars($eq,ENT_QUOTES) }}</code></td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

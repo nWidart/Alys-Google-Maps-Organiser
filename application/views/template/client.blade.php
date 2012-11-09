@@ -21,7 +21,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="{{ URL::to_route(''.strtolower(Auth::user()->username).'') }}" name="top">
-					{{ strtolower(Auth::user()->username) }}
+					{{ ucwords( strtolower(Auth::user()->username) ) }}
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
