@@ -122,8 +122,8 @@ Add a marker| Alys Google Maps manager
 				   Form::xlarge_textarea('rem4', Input::old('rem4'), array('rows' => '2')));
 
 				$value = (isset($marker->rem5)) ? $marker->rem5 : '';
-				echo Form::control_group(Form::label('rem4', 'Remarque #4'),
-				   Form::xlarge_textarea('rem4', Input::old('rem5'), array('rows' => '2')));
+				echo Form::control_group(Form::label('rem5', 'Remarque #5'),
+				   Form::xlarge_textarea('rem5', Input::old('rem5'), array('rows' => '2')));
 			?>
 		</div>
 
