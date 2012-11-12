@@ -46,7 +46,7 @@ Markers list | Alys Google Maps manager
 						@endforeach
 					@else
 						<p class="lead">
-							You don't have any markers. <a href="{{ URL::to_route('client_new_marker')) }}">Start by adding a marker here.</a>
+							You don't have any markers. <a href="{{ URL::to_route('client_new_marker') }}">Start by adding a marker here.</a>
 						</p>
 					@endif
 

@@ -129,7 +129,7 @@ Edit a marker| Alys Google Maps manager
 		<div class="span3 offset1 img_thumb">
 			@if ( !empty($marker->img_url) )
 				<h5>Votre image:</h5>
-				<div class="img_wrapper"><img src="{{ $marker->img_url }}"></div>
+				<div class="img_wrapper"><img src="http://www.alys.be/googlemaps/public{{ $marker->img_url }}"></div>
 			@endif
 		</div>
 		<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
