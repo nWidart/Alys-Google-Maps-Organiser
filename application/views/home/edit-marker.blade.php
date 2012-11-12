@@ -96,9 +96,10 @@ Edit a marker| Alys Google Maps manager
 			echo Form::control_group(Form::label('client', 'Client'),
 			Form::select('client', $clients, $marker->user_id));
 
-			echo Form::actions(array(Buttons::success_submit( 'Edit' ) ));
+			echo Form::actions(array(Buttons::success_submit( 'Edit' ), Buttons::link_danger('Delete', '#myModal', array('role' => 'button', 'data-toggle' => 'modal')) ));
 
 		?>
+		
 		</div>
 		<div class="span5">
 			<?php
@@ -130,6 +131,21 @@ Edit a marker| Alys Google Maps manager
 				<h5>Votre image:</h5>
 				<div class="img_wrapper"><img src="{{ $marker->img_url }}"></div>
 			@endif
+		</div>
+		<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">Confirmation de suppresion</h3>
+			</div>
+			<div class="modal-body">
+				<p class="error-text">Etes vous sur de vouloir supprimer le marker?</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+				<a href="{{ URL::to_action('home@delete_marker/' . $marker->id) }}">
+					<button class="btn btn-danger">Suprimmer</button>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

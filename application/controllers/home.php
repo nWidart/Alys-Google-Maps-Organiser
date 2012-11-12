@@ -175,8 +175,21 @@ class Home_Controller extends Base_Controller {
 			$marker->rem3 = URLify::downcode( Input::get( 'rem3', '' ) );
 			$marker->rem4 = URLify::downcode( Input::get( 'rem4', '' ) );
 			$marker->rem5 = URLify::downcode( Input::get( 'rem5', '' ) );
-			if ( !empty( $file['name'] ) )
+
+			if ( !empty( $file['name'] ) ) {
 				$marker->img_url = '/img/uploads/' . $file['name'];
+			}
+			else {
+				if ( Auth::user()->group == 2 ) {
+					$marker->img_url = '/img/uploads/' . Auth::user()->username . '/defaut.jpg';
+				}
+				else {
+					$user = User::find( $input['client'] );
+					$username = $user->username;
+					$marker->img_url = '/img/uploads/' . $username . '/defaut.jpg';
+				}
+				
+			}
 			$marker->save();
 
 			return Redirect::to_action( 'home@new_marker' )->with( 'message', 'Marker added!' );
@@ -287,8 +300,8 @@ class Home_Controller extends Base_Controller {
 
 	public function get_delete_marker( $id ) {
 		Marker::find( $id )->delete();
-		if ( Session::has( 'client_name_s' ) ) {
-			return Redirect::to_action( 'home@marker_'.Session::get( 'client_name_s' ) )->with( 'message', 'Marker deleted!' );
+		if ( Auth::user()->group != 1 ) {
+			return Redirect::to_route( Auth::user()->username )->with( 'message', 'Marker deleted!' );
 		}
 		else {
 			return Redirect::to_action( 'home@marker' )->with( 'message', 'Marker deleted!' );

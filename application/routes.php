@@ -11,16 +11,10 @@
 * 
 */
 
-// Route pour Bulmann
+// Route pour Bulhmann
 Route::any('buhlmann', array('as' => 'buhlmann', 'uses' => 'company@index', 'before' => 'client') );
 
-// Route pour Lemmens
-Route::any('lemmens', array('as' => 'lemmens', 'uses' => 'company@index', 'before' => 'client') );
-
-// Route pour testing
-Route::any('testing', array('as' => 'testing', 'uses' => 'company@index', 'before' => 'client') );
-
-Route::any('testuser2', array('as' => 'testuser2', 'uses' => 'company@index', 'before' => 'client') );
+// Route pour TCR-Group
 Route::any('tcr-group', array('as' => 'tcr-group', 'uses' => 'company@index', 'before' => 'client') );
 
 

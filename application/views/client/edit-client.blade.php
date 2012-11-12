@@ -62,7 +62,7 @@ Edit a client| Alys Google Maps manager
 				{{ Buttons::link('Add marker for this client', 'home/new_marker/'.$client->id) }}
 				@if ( $client->group != 1 )
 					
-					<a class="btn-danger btn" href="{{ URl::to_action('client@delete_client/'.$client->id) }}" type="button">Delete</a>
+					<a class="btn-danger btn" href="{{ URL::to_action('client@delete_client/'.$client->id) }}" type="button">Delete</a>
 				@endif
 			</div>
 			

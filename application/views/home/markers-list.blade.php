@@ -37,7 +37,7 @@ Markers list | Alys Google Maps manager
 			<table class="table table-striped">
 			  <thead>
 				<tr>
-					<th style="width: 36px;">E / D</th>
+					<th style="width: 15px; border-right: 1px solid #e3e3e3;">E</th>
 					<th>#</th>
 					<th>Name</th>
 					<th>Address</th>
@@ -51,9 +51,8 @@ Markers list | Alys Google Maps manager
 			  	@if( !empty($markers) )
 					@foreach ($markers->results as $marker)
 						<tr>
-							<td>
+							<td style="width: 15px; border-right: 1px solid #e3e3e3;">
 								<a href="{{ URL::to_action('home@edit_marker/') }}/{{ $marker->id }}"><i class="icon-pencil"></i></a>
-								<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
 							</td>
 							<td>{{ $marker->id }}</td>
 							<td>{{ $marker->name }}</td>
@@ -63,23 +62,6 @@ Markers list | Alys Google Maps manager
 							<td>{{ $marker->type }}</td>
 							<td>{{ $marker->username }}</td>
 						</tr>
-						<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								<h3 id="myModalLabel">Confirmation de suppresion</h3>
-							</div>
-							<div class="modal-body">
-								<p class="error-text">Etes vous sur de vouloir supprimer le marker?</p>
-							</div>
-							<div class="modal-footer">
-								@if( !empty($markers) )
-								<button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-								<a href="{{ URL::to_action('home@delete_marker/' . $marker->id) }}">
-									<button class="btn btn-danger">Suprimmer</button>
-								</a>
-								@endif
-							</div>
-						</div>
 					@endforeach
 				@endif
 			  </tbody>
